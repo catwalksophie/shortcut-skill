@@ -24,6 +24,7 @@ Or manually:
 
 - Shortcut.com account with API access
 - API token stored at `/root/secrets/shortcut-api-token`
+- Token must have permissions for the workspace(s) you want to manage
 
 ## Usage
 
@@ -47,7 +48,9 @@ All scripts use the Shortcut API v3.
 
 The skill expects:
 - Shortcut API token at `/root/secrets/shortcut-api-token`
-- Access to a Shortcut workspace
+- Access to a Shortcut workspace with appropriate permissions
+
+**Note:** Default workflow state IDs (500000006 for Unstarted, etc.) may vary by workspace. If stories aren't appearing in the expected state, check your workspace's workflow configuration.
 
 ## License
 

@@ -10,9 +10,8 @@ Manage tasks and stories on Shortcut.com project boards via API.
 
 ## Prerequisites
 
-- Shortcut API token at `/root/secrets/shortcut-api-token`
-- Workspace: `coalface`
-- Team: `dev`
+- Shortcut API token stored at `/root/secrets/shortcut-api-token`
+- Access to a Shortcut workspace with appropriate permissions
 
 ## Available Operations
 
@@ -45,10 +44,12 @@ Story types:
 scripts/shortcut-update-story.sh <story-id> [--state started|done|unstarted] [--description "new text"]
 ```
 
-Common workflow states:
-- `500000006` - Unstarted
-- `500000007` - Started  
-- `500000008` - Done
+Workflow state IDs vary by workspace. Common defaults:
+- Unstarted (typically `500000006`)
+- Started (typically `500000007`)
+- Done (typically `500000008`)
+
+To find your workspace's state IDs, use the Shortcut API or check your board settings.
 
 ## Workflow
 
@@ -58,6 +59,7 @@ Common workflow states:
 
 ## Notes
 
-- All scripts require sudo access to read the API token
-- Stories are created in "Unstarted" state by default
-- The workspace and team are pre-configured in the scripts
+- All scripts require sudo access to read the API token from `/root/secrets/shortcut-api-token`
+- Stories are created in "Unstarted" state by default (workflow_state_id: 500000006)
+- If your workspace uses different workflow state IDs, you may need to adjust the scripts
+- The token must have permissions for the workspace you want to manage
