@@ -27,6 +27,17 @@ Options:
 - `--all` - Include archived stories
 - `--json` - Output raw JSON
 
+### Show Story Details
+
+```bash
+scripts/shortcut-show-story.sh <story-id>
+```
+
+Displays full story information including:
+- Story name and status
+- Description (if present)
+- Checklist items with completion status
+
 ### Create Story
 
 ```bash
@@ -41,15 +52,58 @@ Story types:
 ### Update Story
 
 ```bash
-scripts/shortcut-update-story.sh <story-id> [--state started|done|unstarted] [--description "new text"]
+scripts/shortcut-update-story.sh <story-id> [--complete|--todo|--in-progress] [--description "new text"]
 ```
 
 Workflow state IDs vary by workspace. Common defaults:
-- Unstarted (typically `500000006`)
-- Started (typically `500000007`)
-- Done (typically `500000008`)
+- To Do (typically `500000006`)
+- In Progress (typically `500000007`)
+- Done (typically `500000010`)
 
 To find your workspace's state IDs, use the Shortcut API or check your board settings.
+
+### Manage Checklist Tasks
+
+**Create a task:**
+```bash
+scripts/shortcut-create-task.sh <story-id> "task description"
+```
+
+**Update task completion status:**
+```bash
+scripts/shortcut-update-task.sh <story-id> <task-id> [--complete|--incomplete]
+```
+
+**Edit task description:**
+```bash
+scripts/shortcut-edit-task.sh <story-id> <task-id> "new description"
+```
+
+**Delete a task:**
+```bash
+scripts/shortcut-delete-task.sh <story-id> <task-id>
+```
+
+Use `shortcut-show-story.sh` to see task IDs.
+
+### Manage Comments
+
+**Add a comment:**
+```bash
+scripts/shortcut-add-comment.sh <story-id> "comment text"
+```
+
+**Update a comment:**
+```bash
+scripts/shortcut-update-comment.sh <story-id> <comment-id> "new text"
+```
+
+**Delete a comment:**
+```bash
+scripts/shortcut-delete-comment.sh <story-id> <comment-id>
+```
+
+Use `shortcut-show-story.sh` to see comment IDs.
 
 ## Workflow
 
