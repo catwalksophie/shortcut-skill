@@ -1,6 +1,6 @@
 ---
 name: shortcut
-version: 1.1.0
+version: 1.2.0
 description: Manage stories on Shortcut.com kanban boards. Use when creating, updating, or listing tasks/stories on Shortcut project management boards. Supports creating stories with descriptions and types (feature/bug/chore), updating story status, and listing active/completed stories. Includes full checklist task management and comment support.
 ---
 
@@ -10,8 +10,21 @@ Manage tasks and stories on Shortcut.com project boards via API.
 
 ## Prerequisites
 
-- Shortcut API token stored at `/root/secrets/shortcut-api-token`
+- Shortcut API token configured via one of:
+  - Environment variable: `SHORTCUT_API_TOKEN`
+  - File: `~/.config/shortcut/api-token`
 - Access to a Shortcut workspace with appropriate permissions
+
+### Setup
+
+1. Get your API token from Shortcut.com (Settings → API Tokens)
+2. Store it either:
+   - As environment variable: `export SHORTCUT_API_TOKEN="your-token"`
+   - In a file: `echo "your-token" > ~/.config/shortcut/api-token && chmod 600 ~/.config/shortcut/api-token`
+3. Optionally add to `~/.bashrc` for persistence:
+   ```bash
+   export SHORTCUT_API_TOKEN=$(cat ~/.config/shortcut/api-token 2>/dev/null | tr -d '\n')
+   ```
 
 ## Available Operations
 
@@ -113,7 +126,7 @@ Use `shortcut-show-story.sh` to see comment IDs.
 
 ## Notes
 
-- All scripts require sudo access to read the API token from `/root/secrets/shortcut-api-token`
+- Scripts use `SHORTCUT_API_TOKEN` environment variable or fall back to `~/.config/shortcut/api-token`
 - Stories are created in "Unstarted" state by default (workflow_state_id: 500000006)
 - If your workspace uses different workflow state IDs, you may need to adjust the scripts
 - The token must have permissions for the workspace you want to manage
