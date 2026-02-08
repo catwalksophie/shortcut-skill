@@ -1,6 +1,6 @@
 ---
 name: shortcut
-version: 1.2.0
+version: 1.3.0
 description: Manage stories on Shortcut.com kanban boards. Use when creating, updating, or listing tasks/stories on Shortcut project management boards. Supports creating stories with descriptions and types (feature/bug/chore), updating story status, and listing active/completed stories. Includes full checklist task management and comment support.
 ---
 
@@ -68,12 +68,18 @@ Story types:
 scripts/shortcut-update-story.sh <story-id> [--complete|--todo|--in-progress] [--description "new text"]
 ```
 
-Workflow state IDs vary by workspace. Common defaults:
-- To Do (typically `500000006`)
-- In Progress (typically `500000007`)
-- Done (typically `500000010`)
+The script uses the following workflow state IDs (configured for coalface workspace):
+- Backlog: `500000006`
+- To Do: `500000007`
+- In Progress: `500000008`
+- In Review: `500000009`
+- Done: `500000010`
 
-To find your workspace's state IDs, use the Shortcut API or check your board settings.
+**Note:** If your workspace uses different state IDs, you'll need to update the values in `scripts/shortcut-update-story.sh`. Find your workspace's state IDs with:
+```bash
+curl -X GET -H "Shortcut-Token: $SHORTCUT_API_TOKEN" \
+  https://api.app.shortcut.com/api/v3/workflows | jq '.[] | .states[] | "\(.name): \(.id)"'
+```
 
 ### Manage Checklist Tasks
 

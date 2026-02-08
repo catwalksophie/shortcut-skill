@@ -18,10 +18,12 @@ if [ -z "$STORY_ID" ]; then
 fi
 shift
 
-# Workflow state IDs (from the API response earlier)
-STATE_TODO=500000006
+# Workflow state IDs for coalface workspace
+STATE_BACKLOG=500000006
+STATE_TODO=500000007
+STATE_IN_PROGRESS=500000008
+STATE_IN_REVIEW=500000009
 STATE_DONE=500000010
-STATE_IN_PROGRESS=500000007  # Assuming standard workflow
 
 # Build update payload
 UPDATES=()
