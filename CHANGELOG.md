@@ -2,6 +2,13 @@
 
 All notable changes to the Shortcut skill will be documented in this file.
 
+## [1.4.1] - 2026-02-08
+
+### Changed
+- Cleaned up personal/workspace-specific references from README
+- Updated documentation to use standard config paths (~/.config/shortcut/)
+- Removed internal submission documentation
+
 ## [1.4.0] - 2026-02-08
 
 ### Added

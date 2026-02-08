@@ -1,6 +1,6 @@
 ---
 name: shortcut
-version: 1.4.0
+version: 1.4.1
 description: Manage stories on Shortcut.com kanban boards. Use when creating, updating, or listing tasks/stories on Shortcut project management boards. Supports creating stories with descriptions and types (feature/bug/chore), updating story status, and listing active/completed stories. Includes full checklist task management and comment support.
 ---
 
