@@ -1,6 +1,6 @@
 ---
 name: shortcut
-version: 1.3.0
+version: 1.4.0
 description: Manage stories on Shortcut.com kanban boards. Use when creating, updating, or listing tasks/stories on Shortcut project management boards. Supports creating stories with descriptions and types (feature/bug/chore), updating story status, and listing active/completed stories. Includes full checklist task management and comment support.
 ---
 
@@ -21,9 +21,15 @@ Manage tasks and stories on Shortcut.com project boards via API.
 2. Store it either:
    - As environment variable: `export SHORTCUT_API_TOKEN="your-token"`
    - In a file: `echo "your-token" > ~/.config/shortcut/api-token && chmod 600 ~/.config/shortcut/api-token`
-3. Optionally add to `~/.bashrc` for persistence:
+3. Initialize workflow states for your workspace:
+   ```bash
+   scripts/shortcut-init-workflow.sh
+   ```
+   This creates `~/.config/shortcut/workflow-states` with your workspace's actual state IDs.
+4. Optionally add to `~/.bashrc` for persistence:
    ```bash
    export SHORTCUT_API_TOKEN=$(cat ~/.config/shortcut/api-token 2>/dev/null | tr -d '\n')
+   source ~/.config/shortcut/workflow-states
    ```
 
 ## Available Operations
@@ -68,18 +74,14 @@ Story types:
 scripts/shortcut-update-story.sh <story-id> [--complete|--todo|--in-progress] [--description "new text"]
 ```
 
-The script uses the following workflow state IDs (configured for coalface workspace):
+**Workflow states:** The script uses state IDs from `~/.config/shortcut/workflow-states` (created by `shortcut-init-workflow.sh`). If not configured, it falls back to common defaults:
 - Backlog: `500000006`
 - To Do: `500000007`
 - In Progress: `500000008`
 - In Review: `500000009`
 - Done: `500000010`
 
-**Note:** If your workspace uses different state IDs, you'll need to update the values in `scripts/shortcut-update-story.sh`. Find your workspace's state IDs with:
-```bash
-curl -X GET -H "Shortcut-Token: $SHORTCUT_API_TOKEN" \
-  https://api.app.shortcut.com/api/v3/workflows | jq '.[] | .states[] | "\(.name): \(.id)"'
-```
+**Note:** Different Shortcut workspaces may use different state IDs. Always run `shortcut-init-workflow.sh` to configure your workspace's actual IDs.
 
 ### Manage Checklist Tasks
 

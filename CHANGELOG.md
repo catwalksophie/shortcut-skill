@@ -2,6 +2,21 @@
 
 All notable changes to the Shortcut skill will be documented in this file.
 
+## [1.4.0] - 2026-02-08
+
+### Added
+- `shortcut-init-workflow.sh` script to auto-detect workspace-specific state IDs
+- Support for configuring state IDs via `~/.config/shortcut/workflow-states`
+- Environment variable overrides for all workflow states
+
+### Changed
+- Removed hardcoded "coalface" workspace references (now workspace-agnostic)
+- Scripts now auto-load state IDs from config file or fall back to env vars/defaults
+- Updated documentation to recommend running init script during setup
+
+### Fixed
+- Made skill portable across different Shortcut workspaces
+
 ## [1.3.0] - 2026-02-08
 
 ### Fixed
